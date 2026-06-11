@@ -27,7 +27,11 @@ func zamanAl(sure string) (saniye int) {
 }
 func zamanYazdir(saniye int) {
 	for i := saniye; i > 0; i-- {
+		saat := i / 3600
+		dakika := (i % 3600) / 60
+		saniye := i % 60
 		time.Sleep(1 * time.Second)
-		fmt.Printf("%s %2d\r", "Kalan süre", i)
+		fmt.Printf("%s %02d:%02d:%02d\r", "Kalan süre", saat, dakika, saniye)
 	}
+	fmt.Println("TAMAMLANDI!")
 }
