@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"os"
+	"os/exec"
 	"strconv"
 	"time"
 )
@@ -26,12 +27,14 @@ func zamanAl(sure string) (saniye int) {
 	return
 }
 func zamanYazdir(saniye int) {
-	for i := saniye; i > 0; i-- {
+	for i := saniye; i >= 0; i-- {
 		saat := i / 3600
 		dakika := (i % 3600) / 60
 		saniye := i % 60
-		time.Sleep(1 * time.Second)
 		fmt.Printf("%s %02d:%02d:%02d\r", "Kalan süre", saat, dakika, saniye)
+		time.Sleep(1 * time.Second)
 	}
-	fmt.Println("TAMAMLANDI!")
+	fmt.Printf("\n%s", "TAMAMLANDI!")
+	fmt.Println("\a")
+	exec.Command("kdialog", "--title", "Timer", "--msgbox", "Süre doldu!").Run()
 }
